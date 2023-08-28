@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Defination for Student'
+define service ZEXPOSE_STUD12 {
+  expose ZCSTUDENT12;
+  expose ZCEXAM_12;
+}

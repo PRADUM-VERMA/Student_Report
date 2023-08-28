@@ -1,0 +1,113 @@
+@Metadata.layer: #CORE
+// this is for header
+@UI: { 
+   headerInfo:{ typeName : 'Student',
+                typeNamePlural: 'Students',
+                title: { type : #STANDARD , label:'Student', value : 'Studentid' }
+        }
+}
+annotate view ZCSTUDENT12
+    with 
+{
+  // this is for create click
+      @UI.facet:[ { id : 'Studentid',
+                    purpose: #STANDARD,
+                    type : #IDENTIFICATION_REFERENCE,
+                    label : 'Student',
+                    position: 10 
+        },
+        {
+                    id : 'examDetailsFacet', 
+                    purpose: #STANDARD,
+                    type : #LINEITEM_REFERENCE,
+                    label : 'EXAM RESULT',
+                    position: 20,
+                    targetElement:'_examresult_12'
+         }
+        ]
+        
+    @UI:{    lineItem: [ { position: 10, label: 'System Id' } ],
+              identification: [{ position: 10 , label: 'System Id' }] 
+         }
+    SystemId;
+     @UI:{    lineItem: [ { position: 20, label: 'Student Id' } ],
+              identification: [{ position: 20 , label: 'Student Id' }],
+              selectionField: [ { position: 30 } ]  
+         }
+    StudentId;
+     @UI:{    lineItem: [ { position: 30, label: 'Student Name' } ],
+              identification: [{ position: 30 , label: 'Student Name' }],
+              selectionField: [ { position: 30 } ] 
+         }
+    StudentName;
+     @UI:{    lineItem: [ { position: 40, label: 'Date of Birth' } ],
+              identification: [{ position: 40 , label: 'Date of Birth' }] 
+         }
+    DateOfBirth;
+      @UI:{    lineItem: [ { position: 50, label: 'Gender' } ],
+              identification: [{ position: 50 , label: 'Gender' }] 
+         }
+         
+    @Consumption.valueHelpDefinition: [{ entity:{ name:'ZI_GENDER_12345', element: 'Value' },
+     distinctValues: true,
+     additionalBinding: [ { localElement: 'Genderdesc',
+                            element: 'Description',
+                            usage: #FILTER_AND_RESULT
+       } ]
+     }]     
+         
+    Gender;
+    
+    @UI: { identification: [{ position: 60 , label: 'Gender Description' }] }
+    Genderdesc;
+     @UI:{    lineItem: [ { position: 70, label: 'Mail Id' } ],
+              identification: [{ position: 70 , label: 'Mail Id' }] 
+         }      
+    MailId;
+    @UI:{    lineItem: [ { position: 80, label: 'Contact Number' } ],
+              identification: [{ position: 80 , label: 'Contact Number' }] 
+         }
+    ContactNumber;
+    @UI:{    lineItem: [ { position: 90, label: 'Age' } ],
+              identification: [{ position: 90 , label: 'Age' }] 
+         }
+    Age;
+     @UI:{    lineItem: [ { position: 100, label: 'Address' } ],
+              identification: [{ position: 100 , label: 'Address' }] 
+         } 
+    Address;
+    @UI:{    lineItem: [ { position: 110, label: 'Father Name' } ],
+              identification: [{ position: 110 , label: 'Father Name' }] 
+         }
+    FatherName;
+    @UI:{    lineItem: [ { position: 120, label: 'Mother Name' } ],
+              identification: [{ position: 120 , label: 'Mother Name' }] 
+         }
+    MotherName;
+     @UI:{    lineItem: [ { position: 130, label: 'Current Class' } ],
+              identification: [{ position: 130 , label: 'Current Class' }] 
+         }
+    
+    current_class;
+     @UI:{    lineItem: [ { position: 140, label: 'Joining year' } ],
+              identification: [{ position: 140 , label: 'Joining year' }] 
+         }
+         
+    JoiningYear;
+     @UI:{    lineItem: [ { position: 150, label: 'StudentType' }
+      ],
+              identification: [{ position: 150 , label: 'StudentType' }
+              ] 
+         }
+    StudentType;
+      @UI:{    lineItem: [ { position: 160, label: 'Departure year' },
+               // This is for Custom Button
+              { type: #FOR_ACTION, dataAction: 'setAdmitted2', label : 'Set Admitted' }
+      ],
+              identification: [{ position: 160 , label: 'Departure year' },
+               { type: #FOR_ACTION, dataAction: 'setAdmitted2', label : 'Set Admitted' }
+              ] 
+         }
+    DepartureYear;
+    
+}

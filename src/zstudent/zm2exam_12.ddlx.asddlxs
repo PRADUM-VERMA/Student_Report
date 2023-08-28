@@ -1,0 +1,81 @@
+@Metadata.layer: #PARTNER
+@UI: { 
+   headerInfo:{ typeName : 'EXAM RESULT',
+                typeNamePlural: 'EXAM RESULTS',
+                title: { type : #STANDARD , label:'EXAM_RESULTS', value : 'SystemId' },
+                description: { type : #STANDARD , label: 'Academic Result'}
+        },
+        presentationVariant: [ { sortOrder: [ { by: 'CLASS' , direction: #ASC } ] } ]
+}
+@Search.searchable: true
+annotate view ZCEXAM_12
+    with 
+{
+   // this is for create click
+      @UI.facet:[ { id : 'Acadmic',
+                    purpose: #STANDARD,
+                    type : #IDENTIFICATION_REFERENCE,
+                    label : 'Student',
+                    position: 10 
+        } ] 
+     @UI:{   // lineItem: [ { position: 10, label: 'Student Id' } ],
+              identification: [{ position: 10 , label: 'Student Id' }] 
+         }
+      @UI.hidden: true   
+     SystemId;
+      @UI:{    lineItem: [ { position: 20, importance: #HIGH ,label: 'Student id' } ],
+              identification: [{ position: 20, label: 'Student id' }]
+           //   selectionField:[ { position: 20 } ]  
+         }
+         // this is for default search
+         @Search.defaultSearchElement: true
+      StudentId;
+      @UI:{    lineItem: [ { position: 30, importance: #HIGH ,label: 'CLASS' } ],
+              identification: [{ position: 30, label: 'CLASS' }]
+           //   selectionField:[ { position: 20 } ]  
+         }
+         // this is for default search
+         @Search.defaultSearchElement: true
+         @Consumption.valueHelpDefinition: [{ entity: { name:'ZI_CLASS_12', element: 'Value'},
+         distinctValues: true
+       //  additionalBinding:[{localElement:'class_desc', element:'Description',usage: #FILTER_AND_RESULT } ]
+        }]
+     Class;
+//      @UI:{   lineItem:[ { position:80, importance:#HIGH,label:' ' } ],
+//              identification: [{ position:80, label:' ' }] 
+//             // selectionField:[ { position: 30 } ] 
+//         }
+//       @Search.defaultSearchElement: true 
+//     class_desc;
+      @UI:{    lineItem: [ { position: 40, importance: #HIGH ,label: 'SUBJECT' } ],
+              identification: [{ position: 40, label: 'SUBJECT' }] 
+             // selectionField:[ { position: 30 } ] 
+         }
+       @Search.defaultSearchElement: true 
+       @Consumption.valueHelpDefinition: [{ entity: { name:'ZI_SUBJECT_12',element:'Value'}
+   //    additionalBinding: [ { localElement:'subject_desc', element:'Description' } ]
+        }]
+       
+     Subject;
+//      @UI:{    lineItem: [ { position: 70, importance: #HIGH ,label: ' ' } ],
+//              identification: [{ position: 70, label: ' ' }] 
+//             // selectionField:[ { position: 30 } ] 
+//         }
+//       @Search.defaultSearchElement: true 
+//     subject_desc;
+      @UI:{    lineItem: [ { position: 50, importance: #HIGH ,label: 'PASSINGYEAR' } ],
+             identification: [{ position: 50, label: 'PASSINGYEAR' }]
+            // selectionField:[ { position: 40 } ]  
+         }   
+     PassingYear;
+       @UI:{    lineItem: [ { position: 60, label: 'MARK OBTAINED' } ],
+              identification: [{ position: 60, label: 'MARK OBTAINED' }]
+              //selectionField:[ { position: 50 } ]  
+         }
+     MarkObtained;
+     
+     
+     /* Associations */
+   //  _Student;
+    
+}

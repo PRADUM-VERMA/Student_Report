@@ -1,0 +1,77 @@
+managed implementation in class zbp_istudent12 unique;
+//strict ;
+//for draft
+with draft;
+define behavior for ZISTUDENT12 alias student//alias <alias_name>
+persistent table zdbstudenttable
+
+// draft table
+draft table zstudentdrtab
+
+lock master total etag Lastchangedat
+authorization master ( instance )
+etag master Locallastchangedat
+{
+  create;
+  update ;
+  delete;
+  association _examresult_12{create;with draft;}
+  field (numbering : managed , readonly )SystemId;
+ // action ( features : instance) setAdmitted result [1] $self;
+  action ( features : instance) setAdmitted2 result [1] $self;
+
+  mapping for ZDBSTUDENTTABLE
+  {
+      SystemId = system_id;
+      StudentId = student_id;
+      StudentName  = student_name ;
+      DateOfBirth = date_of_birth ;
+      Gender = gender;
+      MailId = mail_id;
+      ContactNumber = contact_number;
+      Age = age ;
+      Address = address;
+      FatherName = father_name;
+      MotherName =  mother_name;
+      JoiningYear = joining_year;
+      StudentType = student_type ;
+      DepartureYear = departure_year;
+      Lastchangedat = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+  }
+}
+
+
+define behavior for ZIEXAMRESULT_12 alias AcademicResult
+persistent table ZEXAMREC12
+// draft table
+draft table zexamdrtable
+lock dependent by _student  //total etag Lastchangedat
+authorization dependent by _student
+etag master Locallastchangedat
+{
+
+ // create;
+  update;
+  delete;
+  association _Student{with draft;}
+
+  field (readonly) SystemId;
+    field (readonly) Class;
+      field (readonly) Subject;
+ // field (readonly) subject_desc;
+ // field (readonly) class_desc;
+ mapping for zexamrec12
+ {
+    SystemId = system_id;
+    Class = class;
+    Subject =subject;
+    PassingYear =passing_year;
+    StudentId = student_id;
+    MarkObtained =mark_obtained ;
+    Lastchangedat = lastchangedat;
+    Locallastchangedat =locallastchangedat;
+//    subject_desc = ;
+//    class_desc =;
+ }
+}

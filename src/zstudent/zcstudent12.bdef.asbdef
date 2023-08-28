@@ -1,0 +1,20 @@
+projection;
+//strict;
+use draft;
+
+define behavior for ZCSTUDENT12 alias Student//alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+ // use action setAdmitted;
+ use action setAdmitted2;
+ use association _examresult_12{create; with draft;}
+}
+define behavior for ZCEXAM_12 alias EXAM //alias <alias_name>
+{
+   use update;
+   use delete;
+   use association _student{with draft;}
+}
